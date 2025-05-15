@@ -1,0 +1,39 @@
+@use './theme.scss';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background-color: theme.$background-color;
+    color: theme.$text-color;
+    font-family: theme.$text-font;
+}
+
+button, a.button {
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    border: 2px solid theme.$brand-color;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: theme.$brand-color;
+    color: theme.$text-color;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.al-r {
+    text-align: right;
+}
+
+.al-c {
+    text-align: center;
+}
+
+.al-l {
+    text-align: left;
+}

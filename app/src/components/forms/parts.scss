@@ -1,0 +1,35 @@
+@use '../../theme.scss';
+
+$height: 45px;
+$label-width: 120px;
+
+.form-field {
+    margin: 10px 0px;
+
+    label {
+        width: $label-width;
+        display: inline-block;
+        vertical-align: top;
+        height: $height;
+        line-height: $height;
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    input {
+        height: $height;
+        line-height: $height;
+        border: 2px solid theme.$brand-color;
+        border-radius: 5px;
+        padding: 0px 10px;
+        width: calc(100% - #{$label-width});
+    }
+}
+
+.form-failure {
+    background-color: theme.$error-color;
+    border-radius: 5px;
+    color: theme.$text-color;
+    margin: 10px 0px;
+    padding: 10px;
+}

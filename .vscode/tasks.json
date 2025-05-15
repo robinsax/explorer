@@ -1,0 +1,122 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Local: App",
+            "type": "npm",
+            "script": "dev",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "problemMatcher": [
+                {
+                    "owner": "typescript",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(.*\\sTS(\\d{4})\\s-\\s.*$)",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                },
+                {
+                    "owner": "typescript",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(.*\\sTS(\\d{4})\\s-\\s.*$)",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                }
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Local: API",
+            "type": "shell",
+            "command": "python",
+            "args": ["src"],
+            "options": {
+                "cwd": "${workspaceFolder}/api",
+                "env": {
+                    "POSTGRES_URI": "postgresql://admin:admin@localhost:5432/main",
+                    "ALLOWED_ORIGINS": "http://localhost:8000,http://localhost",
+                    "SERVICE_PORT": "8001"
+                }
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Local: Infra",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "-f",
+                "docker-compose.services.yaml",
+                "up"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/infra/local"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Local: All",
+            "type": "shell",
+            "dependsOn": [
+                "Local: Infra",
+                "Local: API",
+                "Local: App"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Dev: Reset Schema",
+            "type": "shell",
+            "command": "python",
+            "args": ["etc/dev-scripts/reset_schema.py"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "POSTGRES_URI": "postgresql://admin:admin@localhost:5432/main"
+                }
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Dev: Write TS Models",
+            "type": "shell",
+            "command": "python",
+            "args": ["etc/dev-scripts/write_ts_models.py"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
