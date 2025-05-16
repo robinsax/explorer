@@ -1,43 +1,49 @@
 @use '../../theme.scss';
 
 .site-header {
-    background-color: theme.$brand-color;
+    background-color: theme.$background-color;
     padding: 20px;
     position: fixed;
-    top: 0px;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    top: 20px;
     left: 0px;
     right: 0px;
     z-index: 100;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-    .left {
-        display: inline-block;
-        vertical-align: top;
-        width: 50%;
-
-        .brand {
-            color: theme.$text-color;
-            font-family: theme.$brand-font;
-            font-size: 24px;
-            text-decoration: none;
-        }
+    .brand {
+        text-align: right;
+        color: theme.$text-color;
+        font-family: theme.$brand-font;
+        font-size: 24px;
+        text-decoration: none;
     }
 
-    .right {
-        display: inline-block;
-        vertical-align: top;
-        width: 50%;
+    .user-area {
         text-align: right;
+        border-top: 2px solid theme.$background-color-alt;
+        padding-top: 20px;
+        margin-top: 20px;
 
-        .user-area {
-            font-size: 20px;
+        .user-login {
+            width: 100%;
+            margin: 10px 0px;
+            text-align: center;
         }
 
-        button, .button {
-            margin: 0px 10px;
-            background-color: theme.$text-color;
-            color: theme.$brand-color;
-            font-size: 12px;
-            padding: 6px;
+        .user-profile {
+            width: 160px;
+            height: 160px;
+            border-radius: 80px;
+            padding-top: 30px;
+            border: 5px dashed theme.$background-color-alt;
+            display: inline-block;
+            vertical-align: top;
+            font-size: 20px;
+            text-align: center;
         }
     }
 }

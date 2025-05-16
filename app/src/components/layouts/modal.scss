@@ -1,0 +1,45 @@
+@use '../../theme.scss';
+
+.modal {
+    .modal-background {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-panel {
+        position: relative;
+        z-index: 10;
+        margin: 0px auto;
+        margin-top: 200px;
+        background-color: theme.$background-color;
+        color: theme.$text-color;
+        border-radius: 5px;
+
+        .modal-controls {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: inline-block;
+            vertical-align: top;
+
+            a {
+                color: theme.$text-color;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 30px;
+            }
+        }
+
+        .modal-content {
+            padding: 20px;
+        }
+    }
+}
+
+.modal-panel {
+    width: 600px;
+}

@@ -1,5 +1,5 @@
 {
-  "name": "bonsai",
+  "name": "explorer-frontend",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "maplibre-gl": "^5.5.0",
     "preact": "^10.14.0",
     "preact-render-to-string": "^5.2.2",
     "preact-router": "^4.1.2"

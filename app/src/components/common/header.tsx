@@ -9,22 +9,23 @@ export const Header = () => {
 
     return (
         <header class="site-header">
-            <div class="left">
-                <a href="/" class="brand">bonsai</a>
-            </div>
-            <div class="right">
-                <div class="user-area">
-                    { user ? (
-                        <span>
-                            { user.username }
-                            <button onClick={ () => authHandler.deauthenticate() }>
-                                { _('Log out') }
-                            </button>
-                        </span>
-                    ) : (
-                        <a class="button" href="/login">{ _('Log in') }</a>
-                    ) }
-                </div>
+            <a href="/" class="brand">{ _('explorer') }</a>
+            <div class="user-area">
+                { user ? (
+                    <div class="user-profile">
+                        { user.username }
+                        <br/>
+                        <button
+                            onClick={ () => authHandler.deauthenticate() }
+                        >
+                            { _('Log out') }
+                        </button>
+                    </div>
+                ) : (
+                    <a href="/login" class="button user-login">
+                        { _('Log in') }
+                    </a>
+                ) }
             </div>
         </header>
     );

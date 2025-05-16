@@ -19,7 +19,7 @@ $label-width: 120px;
     input {
         height: $height;
         line-height: $height;
-        border: 2px solid theme.$brand-color;
+        border: 2px solid theme.$background-color-alt;
         border-radius: 5px;
         padding: 0px 10px;
         width: calc(100% - #{$label-width});

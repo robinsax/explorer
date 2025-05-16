@@ -6,6 +6,8 @@ import { APICallFail } from '../../logic/api';
 import { useAuth, useI18n } from '../../contexts';
 import { Field, Failure, Submit, FailureInfo } from './parts';
 
+import './login-form.scss';
+
 export const LoginForm = () => {
     const [user, authHandler] = useAuth();
     const _ = useI18n();
@@ -33,13 +35,13 @@ export const LoginForm = () => {
     };
 
     return (
-        <form class="al-l" onSubmit={ onSubmit }>
-        <Failure
-            failure={ failure }
-            cases={ {
-                creds: _('Invalid login')
-            } }
-        />
+        <form class="login-form" onSubmit={ onSubmit }>
+            <Failure
+                failure={ failure }
+                cases={ {
+                    creds: _('Invalid login')
+                } }
+            />
 
             <Field
                 label={ _('Email') }
@@ -58,13 +60,12 @@ export const LoginForm = () => {
                 } }
             />
 
-            <div class="al-r">
+            <div class="login-action">
                 <Submit label={ _('Log in') }/>
             </div>
 
-            <div class="al-l">
+            <div class="login-register-cta">
                 { _('Need an account?') }
-                <br/>
                 <a class="button" href="/register">{ _('Register') }</a>
             </div>
         </form>

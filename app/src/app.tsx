@@ -1,19 +1,25 @@
 import { h } from 'preact';
 import { render } from 'preact';
-import { useMemo, useState } from 'preact/hooks';
-import { Router, Route } from 'preact-router';
+import { useEffect, useMemo, useState } from 'preact/hooks';
+import { route, Router, Route } from 'preact-router';
 
 import { Header } from './components/common/header';
-import { RegisterPage } from './screens/register';
-import { LoginPage } from './screens/login';
-import { LandingPage } from './screens/landing';
-import { NotFoundPage } from './screens/not-found';
+import { RegisterRoute } from './screens/register';
+import { LoginRoute } from './screens/login';
+import { MainRoute } from './screens/main';
+import { MapContainer } from './map/map-container';
 
 import { UserModel } from './models';
 import { AuthHandler } from './logic/auth-handler';
 import { authContext, i18nContext } from './contexts';
 
 import './main.scss';
+
+const NotFoundPage = () => {
+    useEffect(() => { route('/'); }, []);
+
+    return null;
+};
 
 const App = () => {
   const [user, setUser] = useState<UserModel | null>(null);
@@ -25,11 +31,12 @@ const App = () => {
       <div class="site-root">
         <authContext.Provider value={ [user, authHandler] }>
           <i18nContext.Provider value={ i18nResolver }>
-            <Header />
+            <Header/>
+            <MapContainer/>
             <Router>
-                <Route path="/" component={ LandingPage }/>
-                <Route path="/login" component={ LoginPage }/>
-                <Route path="/register" component={ RegisterPage }/>
+                <Route path="/" component={ MainRoute }/>
+                <Route path="/login" component={ LoginRoute }/>
+                <Route path="/register" component={ RegisterRoute }/>
                 <Route default component={ NotFoundPage }/>
             </Router>
           </i18nContext.Provider>

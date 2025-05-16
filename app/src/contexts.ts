@@ -1,8 +1,8 @@
 import { createContext } from 'preact';
 import { useContext } from 'preact/hooks';
 
-import { AuthHandler } from '@/logic/auth-handler';
-import { UserModel } from '@/models';
+import { AuthHandler } from './logic/auth-handler';
+import { UserModel } from './models';
 
 export const authContext = createContext<[UserModel | null, AuthHandler]>([null, null as unknown as AuthHandler]);
 export const useAuth = () => useContext(authContext); 

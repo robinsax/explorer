@@ -1,0 +1,25 @@
+@use '../../theme.scss';
+
+.login-form {
+    text-align: left;
+
+    .login-action {
+        text-align: right;
+
+        button {
+            width: 100%;
+            margin: 10px 0px;
+        }
+    }
+
+    .login-register-cta {
+        margin-top: 20px;
+        font-size: 12px;
+        text-align: center;
+
+        a {
+            padding: 5px;
+            vertical-align: middle;
+        }
+    }
+}
