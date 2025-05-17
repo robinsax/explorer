@@ -60,6 +60,7 @@
             "type": "shell",
             "command": "docker-compose",
             "args": [
+                "--rm",
                 "-f",
                 "docker-compose.services.yaml",
                 "up"
@@ -74,12 +75,27 @@
             }
         },
         {
+            "label": "Local: Tiles",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "start"],
+            "options": {
+                "cwd": "${workspaceFolder}/tiles"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
             "label": "Local: All",
             "type": "shell",
             "dependsOn": [
                 "Local: Infra",
                 "Local: API",
-                "Local: App"
+                "Local: App",
+                "Local: Tiles"
             ],
             "problemMatcher": [],
             "presentation": {
@@ -88,7 +104,7 @@
             }
         },
         {
-            "label": "Dev: Reset Schema",
+            "label": "Dev: Reset Postgres Schema",
             "type": "shell",
             "command": "python",
             "args": ["etc/dev-scripts/reset_schema.py"],
@@ -111,6 +127,20 @@
             "args": ["etc/dev-scripts/write_ts_models.py"],
             "options": {
                 "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Dev: Generate Tiles",
+            "type": "shell",
+            "command": "bash",
+            "args": ["run-tile-generator.sh"],
+            "options": {
+                "cwd": "${workspaceFolder}/tiles"
             },
             "problemMatcher": [],
             "presentation": {

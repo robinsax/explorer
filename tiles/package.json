@@ -1,0 +1,12 @@
+{
+  "name": "explorer-tiles",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "tileserver-gl-light": "^5.3.1"
+  },
+  "scripts": {
+    "start": "tileserver-gl-light --file data/tiles.mbtiles"
+  }
+}

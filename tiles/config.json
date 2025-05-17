@@ -1,0 +1,13 @@
+{
+    "options": {
+        "domains": [
+            "localhost"
+        ]
+    },
+    "styles": {},
+    "data": {
+        "default": {
+            "mbtiles": "data/tiles.mbtiles"
+        }
+    }
+}

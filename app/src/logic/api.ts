@@ -22,12 +22,14 @@ const dehydrateModel = (obj: unknown) => {
 };
 
 export const apiCall = async <T>({
-    url,
+    path,
+    query,
     method = 'get',
     accessKey = null,
     body = null
 }: {
-    url: string;
+    path: string;
+    query?: Record<string, string>;
     method: 'get' | 'post' | 'put' | 'delete';
     accessKey?: string | null;
     body?: unknown;
@@ -41,8 +43,12 @@ export const apiCall = async <T>({
         dehydrateModel(body);
         body = JSON.stringify(body);
     }
+    let queryStr = '';
+    if (query) {
+        queryStr = '?' + Object.entries(query).map(e => e.join('=')).join('&');
+    }
 
-    const resp = await fetch('/api' + url, {
+    const resp = await fetch('/api' + path + queryStr, {
         method: method.toUpperCase(),
         headers,
         body: body as BodyInit

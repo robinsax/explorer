@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import Request, Depends
 from sqlalchemy.orm import Session
 
-from ..databases import get_pg_session
+from ..database import get_session
 from ..app import app, ok, fail
 from ..models import BaseModel, User, UserAccessKey
 
@@ -36,7 +36,7 @@ class UserRegistration(BaseModel):
     password: str
 
 @app.post('/users')
-async def register(reg: UserRegistration, session: Session = Depends(get_pg_session)):
+async def register(reg: UserRegistration, session: Session = Depends(get_session)):
     if User.get_by_identifier(session, reg.identifier):
         return fail('already_exists')
 
@@ -49,7 +49,7 @@ async def register(reg: UserRegistration, session: Session = Depends(get_pg_sess
     return ok(user.to_model())
 
 @app.get('/auth')
-async def check_auth(req: Request, session: Session = Depends(get_pg_session)):
+async def check_auth(req: Request, session: Session = Depends(get_session)):
     user = get_current_user(req, session)
     if not user:
         return fail('access_key')
@@ -61,7 +61,7 @@ class UserLogin(BaseModel):
     password: str
 
 @app.post('/auth')
-async def authenticate(auth: UserLogin, session: Session = Depends(get_pg_session)):
+async def authenticate(auth: UserLogin, session: Session = Depends(get_session)):
     user = User.get_by_identifier(session, auth.identifier)
     if not user or not user.check_password(auth.password):
         return fail('creds')
@@ -74,7 +74,7 @@ async def authenticate(auth: UserLogin, session: Session = Depends(get_pg_sessio
     return ok(access_key.to_model())
 
 @app.put('/auth')
-async def refresh_access(req: Request, session: Session = Depends(get_pg_session)):
+async def refresh_access(req: Request, session: Session = Depends(get_session)):
     access_key = get_current_access_key(req, session)
     if not access_key:
         return fail('access_key')
@@ -86,7 +86,7 @@ async def refresh_access(req: Request, session: Session = Depends(get_pg_session
     return ok(access_key.to_model())
 
 @app.delete('/auth/active')
-async def deauthenticate(req: Request, session: Session = Depends(get_pg_session)):
+async def deauthenticate(req: Request, session: Session = Depends(get_session)):
     access_key = get_current_access_key(req, session)
     if not access_key:
         return fail('access_key')
@@ -97,7 +97,7 @@ async def deauthenticate(req: Request, session: Session = Depends(get_pg_session
     return ok(access_key.to_model())
 
 @app.delete('/auth')
-async def deauthenticate_all(req: Request, session: Session = Depends(get_pg_session)):
+async def deauthenticate_all(req: Request, session: Session = Depends(get_session)):
     user = get_current_user(req, session)
     if not user:
         return fail('access_key')

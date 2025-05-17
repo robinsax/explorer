@@ -1,5 +1,14 @@
 /** AUTO-GENERATED */
 
+export type POIModel = {
+    id?: string
+    name: string
+    type: unknown
+    created_at?: Date
+    created_by: string
+    location: [number, number]
+};
+
 export type UserAccessKeyModel = {
     id: string
     user_id: string

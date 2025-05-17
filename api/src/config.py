@@ -15,7 +15,6 @@ def _resolve(key, type=str, default=str()):
     return type(value)
 
 POSTGRES_URI = _resolve('postgres_uri')
-MONGO_URI = _resolve('mongo_uri')
 
 SERVICE_PORT = _resolve('service_port', int)
 ALLOWED_ORIGINS = _resolve('allowed_origins', list)

@@ -52,7 +52,7 @@ export class AuthHandler {
         }
 
         this.user = await apiCall<UserModel>({
-            url: '/auth',
+            path: '/auth',
             method: 'get',
             accessKey: this.accessKey?.id
         });
@@ -63,7 +63,7 @@ export class AuthHandler {
         if (!this.accessKey) return;
 
         this.updateAccessKey(await apiCall<UserAccessKeyModel>({
-            url: '/auth',
+            path: '/auth',
             method: 'put',
             accessKey: this.accessKey?.id
         }));
@@ -80,7 +80,7 @@ export class AuthHandler {
         }
 
         this.updateAccessKey(await apiCall<UserAccessKeyModel>({
-            url: '/auth',
+            path: '/auth',
             method: 'post',
             accessKey: null,
             body: { identifier, password }
@@ -93,7 +93,7 @@ export class AuthHandler {
         if (!this.accessKey) return;
 
         await apiCall({
-            url: '/auth/active',
+            path: '/auth/active',
             method: 'delete',
             accessKey: this.accessKey.id
         });
@@ -102,8 +102,8 @@ export class AuthHandler {
         this.fetchUser();
     }
 
-    apiCall(params: Omit<Parameters<typeof apiCall>[0], 'accessKey'>) {
-        return apiCall({
+    apiCall<T>(params: Omit<Parameters<typeof apiCall>[0], 'accessKey'>) {
+        return apiCall<T>({
             ...params,
             accessKey: this.accessKey?.id
         });

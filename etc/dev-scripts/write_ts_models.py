@@ -2,7 +2,7 @@ import os
 import sys
 import uuid
 from datetime import datetime
-from typing import Union, get_origin, get_args
+from typing import Tuple, Union, get_origin, get_args
 
 sys.path.insert(0, './api')
 os.environ['LAX_API_CONFIG'] = '1'
@@ -17,6 +17,14 @@ def get_ts_field_type(field_type):
         return 'boolean'
     elif field_type is datetime:
         return 'Date'
+    elif get_origin(field_type) is tuple:
+        args = get_args(field_type)
+
+        result = list()
+        for arg in args:
+            result.append(get_ts_field_type(arg))
+
+        return '[' + ', '.join(result) + ']'
     elif issubclass(field_type, models.BaseModel):
         return field_type.__name__
     return 'unknown'

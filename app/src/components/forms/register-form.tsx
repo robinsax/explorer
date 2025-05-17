@@ -20,7 +20,7 @@ export const RegisterForm = () => {
 
         try {
             await authHandler.apiCall({
-                url: '/users',
+                path: '/users',
                 method: 'post',
                 body: {
                     username,
